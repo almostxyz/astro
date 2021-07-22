@@ -165,8 +165,8 @@ function generateAttributes(attrs: Record<string, string>): string {
 }
 
 function getComponentUrl(astroConfig: AstroConfig, url: string, parentUrl: string | URL) {
-  const componentExt = path.extname(url);
-  const ext = PlainExtensions.has(componentExt) ? '.js' : `${componentExt}.js`;
+  const componentExt = path.extname(url) || 'index';
+  const ext = PlainExtensions.has(componentExt) ? componentExt : `${componentExt}.js`;
   const outUrl = new URL(url, parentUrl);
   return '/_astro/' + outUrl.href.replace(astroConfig.projectRoot.href, '').replace(/\.[^.]+$/, ext);
 }
